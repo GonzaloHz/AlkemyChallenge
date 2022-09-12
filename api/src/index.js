@@ -2,8 +2,7 @@ import express from "express"
 import sequelize from "./database/database.js"
 // import "./models/Operation.js"
 // import "./models/User.js"
-import operationRoutes from "./routes/operationsRoutes.js"
-import "./app.js"
+import APP from "./app.js"
 
 const app = express();
 const PORT = 3000;
@@ -13,7 +12,7 @@ app.use(express.json());
 // app.use(express.urlencoded({extended: false}))
 
 //routes
-app.use("/api/auth",operationRoutes)
+app.use(APP)
 
 async function main(){
     //dbConection

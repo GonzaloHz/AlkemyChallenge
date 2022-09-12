@@ -84,3 +84,23 @@ export const updateOperationById = async (req, res)=>{
         "msg":"Check the information, I need the rigth one"
     })
 }
+export const getTotalOperation = async(req, res)=>{
+    try {
+        const allUser= await Operation.findAll();
+        console.log(allUser[0].id)
+        var totalMoney=0
+        for(let i=0; i<allUser.length; i++){
+            if(allUser[i].Type==="Entry"){
+                totalMoney= totalMoney+allUser[i].Total
+            }
+            if(allUser[i].Type==="Egress"){
+                totalMoney= totalMoney-allUser[i].Total
+            }
+        }
+        return res.status(201).json({
+            "The current balance is":totalMoney
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
