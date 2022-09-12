@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type":"module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "author": "GonzaloHz",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.27.2",
     "express": "^4.18.1",
-    "nodemon": "^2.0.19"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.21.6"
   }
 }
