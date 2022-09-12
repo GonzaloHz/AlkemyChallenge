@@ -4,6 +4,7 @@ import { Op } from "sequelize"
 export const getOperations= async (req, res)=>{
     try{
         const allOperation = await Operation.findAll()
+        
         return res.status(201).json(allOperation)
     }catch(error){console.log(error)}
 
