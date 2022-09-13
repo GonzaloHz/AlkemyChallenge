@@ -4,8 +4,16 @@ import { Op } from "sequelize"
 export const getOperations= async (req, res)=>{
     try{
         const allOperation = await Operation.findAll()
+
+        let topten = [];
+        for(let i=allOperation.length-1; i>=allOperation.length-10; i--){
+            topten.push(allOperation[i])
+        }
         
-        return res.status(201).json(allOperation)
+        return res.status(201).json({
+            "ALLOPERATIONS":allOperation,
+            "topTEN":topten    
+        })
     }catch(error){console.log(error)}
 
 }
@@ -98,7 +106,7 @@ export const getTotalOperation = async(req, res)=>{
             }
         }
         return res.status(201).json({
-            "The current balance is":totalMoney
+            "currentBalance":totalMoney
         })
     } catch (error) {
         console.log(error)
