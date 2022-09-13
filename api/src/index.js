@@ -3,9 +3,14 @@ import sequelize from "./database/database.js"
 // import "./models/Operation.js"
 // import "./models/User.js"
 import APP from "./app.js"
+import cors from "cors"
+
 
 const app = express();
-const PORT = 3000;
+const PORT = 8888;
+
+//CORS
+app.use(cors())
 
 //middlewares
 app.use(express.json());
