@@ -1,8 +1,12 @@
-import { GET_LAST_TEN, GET_TOTAL_BALANCE } from "../Actions/Actiontypes";
+import { GET_LAST_TEN, GET_TOTAL_BALANCE, GET_ENTRYS_Y_EGRESS, GET_UNIQUE_OPS } from "../Actions/Actiontypes";
 
 const initialState={
     total:0,
-    topTen:{}
+    topTen:{},
+    entryOPS:{},
+    egressOPS:{},
+    allOPS:{},
+    uniqueOp:{}
 };
 
 
@@ -18,6 +22,19 @@ const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
                 topTen: action.payload
+        }
+        case GET_ENTRYS_Y_EGRESS:
+            return{
+                ...state,
+                entryOPS: action.payload.entryOPS,
+                egressOPS: action.payload.egressOPS,
+                allOPS: action.payload.ALLOPERATIONS
+            }
+        case GET_UNIQUE_OPS:
+            // console.log(action.payload)
+            return{
+                ...state,
+                uniqueOp: action.payload
             }
         default:return {
             ...state
