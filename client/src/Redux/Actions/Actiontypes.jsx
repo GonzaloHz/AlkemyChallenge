@@ -1,2 +1,7 @@
 export const GET_TOTAL_BALANCE='GET_TOTAL_BALANCE'
 export const GET_LAST_TEN='GET_LAST_TEN'
+export const GET_ENTRYS_Y_EGRESS="GET_ENTRYS_Y_EGRESS"
+export const ADD_OPS='ADD_OPS'
+export const DELETE_OPS= 'DELETE_OPS'
+export const UPDATE_OPS= 'UPDATE_OPS'
+export const GET_UNIQUE_OPS = 'GET_UNIQUE_OPS'

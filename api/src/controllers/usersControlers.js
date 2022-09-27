@@ -33,7 +33,7 @@ export const postUser = async(req, res)=>{
 
         const findEmail = await User.findOne({
             where:{
-                id:{
+                email:{
                     [Op.eq]:email
                 }
             }

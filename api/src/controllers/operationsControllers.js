@@ -9,10 +9,26 @@ export const getOperations= async (req, res)=>{
         for(let i=allOperation.length-1; i>=allOperation.length-10; i--){
             topten.push(allOperation[i])
         }
+        let allOperationOrganized = [];
+        let entryOps = [];
+        let egressOps = [];
+        for(let i=allOperation.length-1; i>=0; i--){
+            // console.log(allOperation[i])
+            if(allOperation[i].Type=== "Entry"){
+                entryOps.push(allOperation[i]);
+            }
+            if(allOperation[i].Type=== "Egress"){
+                egressOps.push(allOperation[i]);
+            }
+            allOperationOrganized.push(allOperation[i])
+        }
+        
         
         return res.status(201).json({
-            "ALLOPERATIONS":allOperation,
-            "topTEN":topten    
+            "ALLOPERATIONS":allOperationOrganized,
+            "topTEN":topten,
+            "egressOPS": egressOps,
+            "entryOPS": entryOps    
         })
     }catch(error){console.log(error)}
 
