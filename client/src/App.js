@@ -4,13 +4,17 @@ import Home from "./components/Home/Home.jsx"
 import ActualFinance from './components/OperationForm/ActualFinance';
 import AddOperation from './components/OpsForm/AddOperation';
 import UpdateOps from './components/OpsForm/UpdateOps';
+import UserLogin from './components/userLogin/UserLogin';
+import UserRegister from './components/userLogin/UserRegister';
 
 function App() {
   return (
     <div className="App">
       {/* <div></div> */}
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
+        <Route exact path="/home" element={<Home/>}/>
+        <Route exact path='/registeruser' element={<UserRegister/>}/>
+        <Route exact path="/login" element={<UserLogin/>}/> 
         <Route path="/register" element={<ActualFinance/>}/>
         <Route path="/addops" element={<AddOperation/>}/>
         <Route path="/updateops/:id" element={<UpdateOps/>}/>

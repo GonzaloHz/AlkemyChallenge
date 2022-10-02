@@ -31,7 +31,6 @@ const rootReducer=(state=initialState, action)=>{
                 allOPS: action.payload.ALLOPERATIONS
             }
         case GET_UNIQUE_OPS:
-            // console.log(action.payload)
             return{
                 ...state,
                 uniqueOp: action.payload

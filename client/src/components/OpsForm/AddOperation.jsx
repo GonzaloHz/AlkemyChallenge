@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addOps } from '../../Redux/Actions/Actions';
-import { Validate } from '../Validate/ValidateFunction';
+import { Validate } from './ValidateFunction';
 import OpsForm from './OpsForm';
 
 
