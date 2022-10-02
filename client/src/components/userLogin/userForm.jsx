@@ -57,9 +57,9 @@ const UserForm = ({functionProps, input, setInput, setError, kindOfAction}) => {
                 <input onChange={(e)=>handleOnChange(e)} name="password" type="text" className="form-control" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping"/>
                 </div>  
             </div>
-            <div>
+            {kindOfAction!=="addUser"&&<div>
                 Forgot password?
-            </div>
+            </div>}
             <button type="submit" className="btn btn-outline-dark">{kindOfAction==="addUser"?"Register":"Login"}</button>
             </form>
         </div>
