@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ADD_OPS, DELETE_OPS, GET_ENTRYS_Y_EGRESS, GET_LAST_TEN, GET_TOTAL_BALANCE, GET_UNIQUE_OPS, UPDATE_OPS } from './Actiontypes'
+import { ADD_OPS, ADD_USER, DELETE_OPS, GET_ENTRYS_Y_EGRESS, GET_LAST_TEN, GET_TOTAL_BALANCE, GET_UNIQUE_OPS, UPDATE_OPS } from './Actiontypes'
 
 const url = "http://localhost:8888/api/auth"
 
@@ -68,5 +68,27 @@ export const updateOps=(id, data)=>{
         return dispatch({
             type: UPDATE_OPS
         })
+    }
+}
+
+export const addUser=(data)=>{
+    return async function(dispatch){
+        await axios.post(`${url}/users`, data)
+        return dispatch({
+            type: ADD_USER
+        })
+    }
+}
+
+export const loginUser=(data)=>{
+    return async function(){
+        axios.post(`${url}/userloggin`, data)
+        .then(response=>{
+        if(response.data.token){
+            localStorage.setItem('users', JSON.stringify(response.data))
+        }
+        return response.data
+    }
+        )
     }
 }

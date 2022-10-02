@@ -13,7 +13,7 @@ function OpsForm({handleSubmit, handleChangeName, input, updatedOps}) {
         <label className="form-control">Amount</label>
         <input name="Total" value={input.Total} onChange={(e)=>handleChangeName(e)}/>
         <label className="form-control">Type</label>
-        <input name="Type" value={input.Type} placeholder="Entry or Egress" onChange={(e)=>handleChangeName(e)}/>
+        <input readOnly={updatedOps && "readOnly"} name="Type" value={input.Type} placeholder="Entry or Egress" onChange={(e)=>handleChangeName(e)}/>
         {updatedOps?
         <button>Update Operation</button>:
         <button type="submit">Add Operation</button>

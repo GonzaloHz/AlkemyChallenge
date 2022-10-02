@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getUniqueOp, updateOps } from '../../Redux/Actions/Actions';
 import OpsForm from './OpsForm';
-import { Validate } from '../Validate/ValidateFunction';
+import { Validate } from './ValidateFunction';
 
 
 function UpdateOps() {

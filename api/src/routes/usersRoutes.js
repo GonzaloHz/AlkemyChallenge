@@ -14,7 +14,7 @@ router.post("/users",
         check("name", "Name is required").not().isEmpty(),
         check("password", "Password is required").not().isEmpty(),
         check("email", "Wrong email").isEmail(),
-        validateJWT
+        // validateJWT
     ],
  postUser)
 
@@ -22,6 +22,6 @@ router.delete("/users/:id", validateJWT, deleteUser)
 
 router.put("/users/:id", validateJWT, updateUser)
 
-router.get("/userloggin", loginUser)
+router.post("/userloggin", loginUser)
 
 export default router;

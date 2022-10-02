@@ -128,10 +128,10 @@ export const loginUser= async(req, res)=>{
                 "msg":"Password is not valid"
             })
         }
-        return res.status(201).json({
-            "ok":true,
-            "msg":"User logged succesfully"
-        })
+
+        const token = await generateJWT(userLoged.id, userLoged.name)
+
+        return res.status(201).json({userLoged,token})
     } catch (error) {
         console.log(error)
     }
