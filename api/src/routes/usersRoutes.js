@@ -18,7 +18,9 @@ router.post("/users",
     ],
  postUser)
 
-router.delete("/users/:id", validateJWT, deleteUser)
+router.delete("/users/:id",
+//  validateJWT,
+  deleteUser)
 
 router.put("/users/:id", validateJWT, updateUser)
 

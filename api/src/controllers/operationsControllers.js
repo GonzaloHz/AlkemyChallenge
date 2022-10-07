@@ -1,13 +1,22 @@
 import {Operation} from "../models/Operation.js"
 import { Op } from "sequelize"
+import {User} from "../models/User.js"
 
 export const getOperations= async (req, res)=>{
     try{
-        const allOperation = await Operation.findAll()
+        const allOperation = await Operation.findAll(
+            {
+            include:{
+                model: User
+            }
+        }
+        )
 
         let topten = [];
         for(let i=allOperation.length-1; i>=allOperation.length-10; i--){
+            if(allOperation[i]!==undefined){
             topten.push(allOperation[i])
+            }
         }
         let allOperationOrganized = [];
         let entryOps = [];
@@ -15,12 +24,18 @@ export const getOperations= async (req, res)=>{
         for(let i=allOperation.length-1; i>=0; i--){
             // console.log(allOperation[i])
             if(allOperation[i].Type=== "Entry"){
+                if(allOperation[i]!==undefined){
                 entryOps.push(allOperation[i]);
+                }
             }
             if(allOperation[i].Type=== "Egress"){
+                if(allOperation[i]!==undefined){
                 egressOps.push(allOperation[i]);
+                }
             }
+            if(allOperation[i]!==undefined){
             allOperationOrganized.push(allOperation[i])
+            }
         }
         
         
@@ -34,7 +49,7 @@ export const getOperations= async (req, res)=>{
 
 }
 export const createOperations= async (req, res)=>{
-    const { Name, Concept, Total, Date, Type } = req.body;
+    const { Name, Concept, Total, Date, Type, id } = req.body;
     try{
         if(Name && Concept && Total && Date && Type){
             const newOperation = await Operation.create({
@@ -42,7 +57,8 @@ export const createOperations= async (req, res)=>{
                 Concept: Concept,
                 Total: Total,
                 Date: Date,
-                Type : Type
+                Type : Type,
+                operationId: id
             })
             return res.status(201).json(newOperation)
         }

@@ -2,10 +2,17 @@ import { generateJWT } from "../helpers/jwt.js"
 import { User } from "../models/User.js"
 import { Op } from "sequelize"
 import bcrypt from "bcryptjs"
+import { Operation } from "../models/Operation.js"
 
 export const getUsers=async (req, res)=>{
     try {
-        const allUsers = await User.findAll()
+        const allUsers = await User.findAll(
+            {
+            include:{
+                model: Operation
+            }
+        }
+        )
         return res.status(201).json(allUsers)
     } catch (error) {
         console.log(error)
@@ -16,7 +23,12 @@ export const getUserById=async (req, res)=>{
     try {
         const { id } = req.params;
         if(id){
-            const chosenUser = await User.findByPk(id)
+            const chosenUser = await User.findByPk(id,{
+                include:{
+                    model: Operation
+                }
+            }
+            )
 
             return res.status(201).json(chosenUser)
         }

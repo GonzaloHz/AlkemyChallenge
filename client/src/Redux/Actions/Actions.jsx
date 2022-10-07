@@ -92,3 +92,15 @@ export const loginUser=(data)=>{
         )
     }
 }
+export const logoutUser=()=>{
+    return async function(){
+        localStorage.removeItem('users')
+    }
+}
+
+export const getUserLS=()=>{
+    return async function(){
+        const userLogged = localStorage.getItem('users')
+        return userLogged
+    }
+}
