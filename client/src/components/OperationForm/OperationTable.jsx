@@ -15,9 +15,10 @@ function OperationTable(Array) {
         console.log(myId)
         dispatch(deleteOps(myId))
     }
+    // console.log(Array?.Array[0]!==null)
     return (
         <div>
-            <table className="table table-dark table-striped-columns">
+            {Array?.Array[0]!==null && <table className="table table-dark table-striped-columns">
                 <thead className="table-dark">
                     <tr
                     //  id="miTablaPersonalizada" 
@@ -31,18 +32,18 @@ function OperationTable(Array) {
                         <td><EditOutlinedIcon/></td>
                     </tr>
                 </thead>
-            </table>
-            {Array.Array.length>0 && Array.Array.map(one=>(
-                <table className="table table-stripped" key={one.id}>
+            </table>}
+            {Array?.Array?.length>0 && Array?.Array?.map(one=>(
+                <table className="table table-stripped" key={one?.id}>
                     <tbody>
-                        <tr className={one.Type==="Entry"?"table-success":"table-danger"}>
-                            <td><CloseOutlinedIcon onClick={()=>handleClickOnThrash(one.id)}/></td>
-                            <td>{one.id}</td>
-                            <td>{one.Name}</td>
-                            <td>{one.Date}</td>
-                            <td>{one.Total}</td>
-                            <td>{one.Type}</td>
-                            <td><EditOutlinedIcon/></td>
+                        <tr className={one?.Type==="Entry"?"table-success":"table-danger"}>
+                            {one?.id && <td><CloseOutlinedIcon onClick={()=>handleClickOnThrash(one?.id)}/></td>}
+                            {one?.id && <td>{one?.id}</td>}
+                            {one?.id && <td>{one?.Name}</td>}
+                            {one?.id && <td>{one?.Date}</td>}
+                            {one?.id && <td>{one?.Total}</td>}
+                            {one?.id && <td>{one?.Type}</td>}
+                            {one?.id && <td><EditOutlinedIcon/></td>}
                         </tr>
                     </tbody>
                 </table>

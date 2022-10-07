@@ -4,7 +4,7 @@ import sequelize from "./database/database.js"
 // import "./models/User.js"
 import APP from "./app.js"
 import cors from "cors"
-
+import "./models/Conection.js"
 
 const app = express();
 const PORT = 8888;
