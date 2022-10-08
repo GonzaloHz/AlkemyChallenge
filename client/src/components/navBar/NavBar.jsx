@@ -14,11 +14,9 @@ function NavBar() {
         <nav className="navbar bg-light">
             <div className="container-fluid">
             <Link className="navbar-brand" to="/home">Home</Link>
-           
             <Link className="navbar-brand" to="/register">Register</Link>
             <Link className="navbar-brand" to="/addops">Add Operation</Link>
             <Link className="navbar-brand" to="/profile">Profile</Link>
-          
             <button className="btn btn-outline-danger" onClick={()=>onLogout()}>Logout</button>
             </div>
         </nav>

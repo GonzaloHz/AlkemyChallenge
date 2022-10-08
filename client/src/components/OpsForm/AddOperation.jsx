@@ -7,17 +7,23 @@ import OpsForm from './OpsForm';
 
 function AddOperation() {
 
+    const user = JSON.parse(localStorage.getItem('users'))
+
     const dispatch= useDispatch()
-    const [error, setError] = useState({});
+    const [
+        // error
+        , setError] = useState({});
     const [input, setInput]=useState({
         Name:"",
         Concept:"",
         Date:"",
         Total:0,
-        Type:""
+        Type:"",
+        id:user.userLoged.id
     });
 
-    console.log(error)
+    // console.log(user.userLoged.id)
+    // console.log(input)
   
     const handleChangeName = (e) =>{
         console.log(e.target.value)
@@ -33,7 +39,7 @@ function AddOperation() {
     const handleSubmit = (e)=>{
       e.preventDefault()
       // console.log(input)
-      dispatch(addOps(input))
+      dispatch(addOps(input, user.userLoged.id))
       // console.log("LOGRADO")
       setInput({
         Name:"",

@@ -4,8 +4,14 @@ import {User} from "../models/User.js"
 
 export const getOperations= async (req, res)=>{
     try{
+        const {id}= req.params;
         const allOperation = await Operation.findAll(
             {
+            where:{
+                operationId:{
+                    [Op.eq]:id
+                }
+            },
             include:{
                 model: User
             }
@@ -49,9 +55,10 @@ export const getOperations= async (req, res)=>{
 
 }
 export const createOperations= async (req, res)=>{
-    const { Name, Concept, Total, Date, Type, id } = req.body;
+    const { Name, Concept, Total, Date, Type } = req.body;
+    const { id } = req.params;
     try{
-        if(Name && Concept && Total && Date && Type){
+        if(Name && Concept && Total && Date && Type && id){
             const newOperation = await Operation.create({
                 Name: Name,
                 Concept: Concept,
@@ -126,8 +133,15 @@ export const updateOperationById = async (req, res)=>{
 }
 export const getTotalOperation = async(req, res)=>{
     try {
-        const allUser= await Operation.findAll();
-        console.log(allUser[0].id)
+        const {id}= req.params 
+        const allUser= await Operation.findAll({
+            where:{
+                operationId:{
+                    [Op.eq]:id
+                }
+            }
+        });
+        // console.log(allUser[0].id)
         var totalMoney=0
         for(let i=0; i<allUser.length; i++){
             if(allUser[i].Type==="Entry"){

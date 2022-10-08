@@ -6,9 +6,12 @@ import { getEntrysYEgress } from '../../Redux/Actions/Actions';
 import OperationTable from './OperationTable';
 
 function ActualFinance() {
+
+    const user = JSON.parse(localStorage.getItem('users'))
+
     const dispatch = useDispatch()
     useEffect(()=>{
-        dispatch(getEntrysYEgress())
+        dispatch(getEntrysYEgress(user.userLoged.id))
     })
     const entryOPS =useSelector(state=>state.entryOPS)
     const egressOPS =useSelector(state=>state.egressOPS)

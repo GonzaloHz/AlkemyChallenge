@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { ADD_OPS, ADD_USER, DELETE_OPS, GET_ENTRYS_Y_EGRESS, GET_LAST_TEN, GET_TOTAL_BALANCE, GET_UNIQUE_OPS, UPDATE_OPS } from './Actiontypes'
+import { ADD_OPS, DELETE_OPS, GET_ENTRYS_Y_EGRESS, GET_LAST_TEN, GET_TOTAL_BALANCE, GET_UNIQUE_OPS, UPDATE_OPS } from './Actiontypes'
 
 const url = "http://localhost:8888/api/auth"
 
-export const getTotalBalance=()=>{
+export const getTotalBalance=(id)=>{
     return async function(dispatch){
-        const totalOPS = await axios.get(`${url}/totalOps`)
+        const totalOPS = await axios.get(`${url}/totalOps/${id}`)
         
         // console.log(totalOPS.data.currentBalance)
         return dispatch({
@@ -15,9 +15,9 @@ export const getTotalBalance=()=>{
     }
 }
 
-export const getTopTen=()=>{
+export const getTopTen=(id)=>{
     return async function(dispatch){
-        const lastTen = await axios.get(`${url}/operation`)
+        const lastTen = await axios.get(`${url}/operation/${id}`)
         // console.log(lastTen.data.topTEN)
         return dispatch({
             type: GET_LAST_TEN,
@@ -26,9 +26,9 @@ export const getTopTen=()=>{
     }
 }
 
-export const getEntrysYEgress=()=>{
+export const getEntrysYEgress=(id)=>{
     return async function(dispatch){
-        const entrysOps = await axios.get(`${url}/operation`)
+        const entrysOps = await axios.get(`${url}/operation/${id}`)
         return dispatch({
             type:GET_ENTRYS_Y_EGRESS,
             payload: entrysOps.data
@@ -37,9 +37,9 @@ export const getEntrysYEgress=()=>{
 }
 
 
-export const addOps=(data)=>{
+export const addOps=(data, id)=>{
     return async function(dispatch){
-        await axios.post(`${url}/operation`, data)
+        await axios.post(`${url}/operation/${id}`, data)
         return dispatch({
             type:ADD_OPS
         })
@@ -72,10 +72,13 @@ export const updateOps=(id, data)=>{
 }
 
 export const addUser=(data)=>{
-    return async function(dispatch){
-        await axios.post(`${url}/users`, data)
-        return dispatch({
-            type: ADD_USER
+    return async function(){
+        axios.post(`${url}/users`, data)
+        .then(response=>{
+            if(response.data.token){
+                localStorage.setItem('users', JSON.stringify(response.data))
+            }
+            return response
         })
     }
 }
