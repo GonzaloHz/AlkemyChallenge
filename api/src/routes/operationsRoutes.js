@@ -5,9 +5,9 @@ import { getOperations, createOperations, getOperationById, deleteOperationById,
 const router = Router();
 
 
-router.get("/operation", getOperations)
+router.get("/operation/:id", getOperations)
 
-router.post("/operation", createOperations)
+router.post("/operation/:id", createOperations)
 
 router.get("/operation/:id", getOperationById)
 
@@ -15,6 +15,6 @@ router.delete("/operation/:id", deleteOperationById)
 
 router.put("/operation/:id", updateOperationById)
 
-router.get("/totalOps", getTotalOperation)
+router.get("/totalOps/:id", getTotalOperation)
 
 export default router;

@@ -6,25 +6,60 @@ import NavBar from './components/navBar/NavBar';
 import ActualFinance from './components/OperationForm/ActualFinance';
 import AddOperation from './components/OpsForm/AddOperation';
 import UpdateOps from './components/OpsForm/UpdateOps';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import UnLogedRoute from './components/PrivateRoute/UnLogedRoute';
 import Profile from './components/Profile/Profile';
 import UserLogin from './components/userLogin/UserLogin';
 import UserRegister from './components/userLogin/UserRegister';
 
 function App() {
+  
+  const user = localStorage.getItem('users')
+
   return (
     <div className="App">
-      {/* <div></div> */}
-        <NavBar/>
+      {user && <NavBar/>}
       <Routes>
-        {/* <Route path='/' element={<NavBar/>}/> */}
-        <Route exact path='/' element={<LandingPage/>}/>
-        <Route exact path="/home" element={<Home/>}/>
-        <Route exact path='/registeruser' element={<UserRegister/>}/>
-        <Route exact path="/login" element={<UserLogin/>}/> 
-        <Route exact path="/register" element={<ActualFinance/>}/>
-        <Route exact path="/addops" element={<AddOperation/>}/>
-        <Route path="/updateops/:id" element={<UpdateOps/>}/>
-        <Route exact path="/profile" element={<Profile/>}/>
+        <Route exact path='/' element={
+          <UnLogedRoute>
+            <LandingPage/>
+          </UnLogedRoute>
+      }/>
+        <Route exact path="/home" element={        
+          <PrivateRoute>
+            <Home/>
+          </PrivateRoute>
+        }/>
+        <Route exact path='/registeruser' element={
+          <UnLogedRoute>
+            <UserRegister/>
+          </UnLogedRoute>
+        }/>
+        <Route exact path="/login" element={
+          <UnLogedRoute>
+            <UserLogin/>
+          </UnLogedRoute>
+        }/> 
+        <Route exact path="/register" element={
+          <UnLogedRoute>
+            <ActualFinance/>
+          </UnLogedRoute>
+        }/>
+        <Route exact path="/addops" element={
+          <PrivateRoute>
+            <AddOperation/>
+          </PrivateRoute>
+        }/>
+        <Route path="/updateops/:id" element={
+          <PrivateRoute>
+            <UpdateOps/>
+          </PrivateRoute>
+        }/>
+        <Route exact path="/profile" element={
+          <PrivateRoute>
+            <Profile/>
+          </PrivateRoute>
+      }/>
       </Routes>
     </div>
   );

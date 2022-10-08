@@ -6,13 +6,16 @@ import ActualFinance from '../OperationForm/OperationTable';
 
 function Home() {
 
+    const user = JSON.parse(localStorage.getItem('users'))
+
+
     const dispatch = useDispatch();
     const totalOPS = useSelector(state=>state.total)
     const topTEN = useSelector(state=>state.topTen)
 
     useEffect(()=>{
-        dispatch(getTotalBalance())
-        dispatch(getTopTen())
+        dispatch(getTotalBalance(user.userLoged.id))
+        dispatch(getTopTen(user.userLoged.id))
     })
     // console.log(topTEN)
     // console.log(totalOPS)
@@ -21,9 +24,12 @@ function Home() {
     return (
         <div>
             <h1>This is your current balance</h1>
-            {totalOPS>0?<h2>${totalOPS}.00</h2>:<h2>Loading...</h2>}
 
-            <strong>Register of your last operations</strong>
+            <h2>${totalOPS}.00</h2>
+
+            {topTEN.length>0 && <strong>Register of your last operations</strong>}
+
+            
             <div className="table-responsive">
             <ActualFinance Array={topTEN}/>
             </div>

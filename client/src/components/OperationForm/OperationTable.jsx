@@ -15,13 +15,13 @@ function OperationTable(Array) {
         console.log(myId)
         dispatch(deleteOps(myId))
     }
-    // console.log(Array?.Array[0]!==null)
+    // console.log(Array?.Array)
     return (
         <div>
-            {Array?.Array[0]!==null && <table className="table table-dark table-striped-columns">
+            {Array?.Array.length>0 ?
+            <table className="table table-dark table-striped-columns">
                 <thead className="table-dark">
-                    <tr
-                    //  id="miTablaPersonalizada" 
+                    <tr 
                      className="table-active">
                         <td><CloseOutlinedIcon/></td>
                         <td className="table-active">Id</td>
@@ -32,12 +32,13 @@ function OperationTable(Array) {
                         <td><EditOutlinedIcon/></td>
                     </tr>
                 </thead>
-            </table>}
+            </table>:
+            <h2>This register is empty</h2>}
             {Array?.Array?.length>0 && Array?.Array?.map(one=>(
                 <table className="table table-stripped" key={one?.id}>
                     <tbody>
                         <tr className={one?.Type==="Entry"?"table-success":"table-danger"}>
-                            {one?.id && <td><CloseOutlinedIcon onClick={()=>handleClickOnThrash(one?.id)}/></td>}
+                            {one?.id && <td><CloseOutlinedIcon onClick={()=>handleClickOnThrash(one.id)}/></td>}
                             {one?.id && <td>{one?.id}</td>}
                             {one?.id && <td>{one?.Name}</td>}
                             {one?.id && <td>{one?.Date}</td>}
